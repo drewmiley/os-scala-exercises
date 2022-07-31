@@ -85,7 +85,7 @@ noneIntValue.fold(0)(value => value + 10)
 //Write a function which adds 1 to an option if the value is Some.
 //If the value is None, it should return 0
 def add1OrElse0(opt: Option[Int]): Int = {
-  ???
+  opt.map(value => value + 1).getOrElse(0)
 }
 
 //Tests for method above
@@ -101,7 +101,12 @@ assert(add1OrElse0(None) == 0)
 // If that option is None then return "Nothing there"
 // Anything else should return an empty string
 def optionToString(opt: Option[Any]): String = {
-  ???
+  opt.map {
+    case i: Int => "Its an int"
+    case "Hello" => "Hey"
+    case "Goodbye" => "Bye bye"
+    case _ => ""
+  }.getOrElse("Nothing there")
 }
 
 //Tests
@@ -121,7 +126,7 @@ case class Person(middleName: Option[String])
 //Write a function which takes an optional person, if that person exists,
 //return their middle name as an optional value (Note the middle name may not exist)
 def getMiddleName(person: Option[Person]): Option[String] = {
-  ???
+  person.flatMap(value => value.middleName)
 }
 
 //Tests dont worry about format.
